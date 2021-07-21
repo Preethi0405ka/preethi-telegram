@@ -1,7 +1,8 @@
 from telegram.ext import Updater, MessageHandler,Filters
 from Adafruit_IO import Client
+import os
 
-aio = Client('Preethi__','aio_sqzF08eesB1iXySfBE14QnvXjpH4')
+aio = Client('Preethi__',os.getenv('Preethi__'))
 def turn_on_light(bot,update):
     aio.send('bedroom-light',1)
     data = aio.receive('bedroom-light')
@@ -49,7 +50,7 @@ def main(bot,update):
       else:
             bot.message.reply_text('invalid')
 
-BOT_TOKEN = ('1932322783:AAHpxFchiBoxnLbjLhq26LyIEReSUns1Xas')  
+BOT_TOKEN = os.getenv('BOT_TOKEN')  
 u = Updater(BOT_TOKEN,use_context = True) 
 dp = u.dispatcher
 dp.add_handler(MessageHandler(Filters.text,main)) 
